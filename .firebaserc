@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "sep6-2dccd": {
+      "hosting": {
+        "sep6-app": [
+          "sep6-2dccd"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "sep6-2dccd"
+  }
+}

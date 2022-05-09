@@ -24,6 +24,10 @@ export class AppComponent {
     {
       title: 'Whatever',
       description: 'Does this work?'
+    },
+    {
+      title: 'It works',
+      description: 'Does this work?'
     }
   ];
 }

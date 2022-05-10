@@ -10,8 +10,7 @@ import {Task} from "./task/task";
 export class AppComponent {
   constructor() {
   }
-  Search(){
-  }
+  title = 'angularfiebase-authentication';
   todo: Task[] = [
     {
       title: 'Buy milk',

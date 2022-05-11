@@ -20,6 +20,10 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {AuthService} from "./shared/services/auth.service";
+import { HttpClientModule } from '@angular/common/http';
+import { SearchComponent } from './components/search/search.component';
+import { ToplistComponent } from './components/toplist/toplist.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -30,7 +34,10 @@ import {AuthService} from "./shared/services/auth.service";
     SignInComponent,
     SignUpComponent,
     ForgotPasswordComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    SearchComponent,
+    ToplistComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +51,7 @@ import {AuthService} from "./shared/services/auth.service";
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     AppRoutingModule,
+    HttpClientModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

@@ -1,1 +1,15 @@
+<form class="example-form" [formGroup]="searchFormGroup">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <label>Favorite food</label>
+    <input formControlName="{{ searchTextControlName }}" matInput type="text" placeholder="Ex. Pizza">
+  </mat-form-field>
+
+</form>
+<button (click)="searchMovies()">Search</button>
+<div *ngIf="hasResults" class="movies-wrapper">
+  <div *ngFor="let movie of movies.results" class="movies-content">
+    <img  class="images" src="{{'/assets/ec98252307a13ddcc368e710bbbdd50c.gif'}}" alt=""/>
+    <label > {{movie.title}}</label>
+  </div>
+</div>
 

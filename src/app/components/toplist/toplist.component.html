@@ -1,1 +1,39 @@
 <p>toplist works!</p>
+<div class="inner-adjust">
+  <div class="pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">TopList</h1>
+  </div>
+  <div class="row" *ngIf="authService.userIdToken as userToken">
+    <div class="col-md-12">
+      <div class="media">
+        <div class="media-body">
+          <p>TokenID: {{(userToken) ? userToken : 'UserToken'}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button (click)="getToplist()">Get Toplist</button>
+  <div *ngIf="hasResults">
+    <div *ngFor="let movie of data.data.movieID">
+      <label > {{movie}}</label>
+    </div>
+  </div>
+</div>
+
+<form class="example-form" [formGroup]="addToplistGroup">
+  <mat-form-field appearance="fill">
+    <label>MovieID</label>
+    <input formControlName="{{ toplistID }}" matInput type="text" placeholder="123">
+  </mat-form-field>
+
+</form>
+<button (click)="addToplist()">Add Toplist</button>
+
+<form class="example-form" [formGroup]="deleteToplistGroup">
+  <mat-form-field appearance="fill">
+    <label>MovieID</label>
+    <input formControlName="{{ toplistID2 }}" matInput type="text" placeholder="123">
+  </mat-form-field>
+
+</form>
+<button (click)="deleteToplist()">Delete Toplist</button>

@@ -24,7 +24,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { SearchComponent } from './components/search/search.component';
 import { ToplistComponent } from './components/toplist/toplist.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -52,6 +54,9 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     AngularFireDatabaseModule,
     AppRoutingModule,
     HttpClientModule,
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

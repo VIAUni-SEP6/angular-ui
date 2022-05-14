@@ -14,7 +14,7 @@ export interface ToplistApiObject {
   providedIn: 'root'
 })
 export class BackendService {
-  public baseUrl = 'http://localhost:8080/';
+  public baseUrl = 'https://us-central1-sep6-database.cloudfunctions.net/expressApi/';
   private apiKey = '1629f55fe2e85b91bf3b83337f2a7291';
 
   constructor(private httpClient: HttpClient, public authService:AuthService) { }

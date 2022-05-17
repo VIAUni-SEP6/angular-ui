@@ -1,4 +1,5 @@
 @import "https://use.fontawesome.com/releases/v5.5.0/css/all.css";
+@import "~bootstrap/dist/css/bootstrap.css";
 
 * {
   -webkit-box-sizing: border-box;
@@ -661,3 +662,6 @@ body .table thead th {
     display: none;
   }
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

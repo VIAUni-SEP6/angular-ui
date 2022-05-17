@@ -6,12 +6,12 @@
     </div>
   </mat-form-field>
 </div>
-<button (click)="searchMovies()">Search</button>
+<button mat-button class="bg-dark search-button" (click)="searchMovies()">Search</button>
 <div *ngIf="hasResults" class="movies-wrapper">
-  <div mat-card-content *ngFor="let movie of movies.results" class="movies-content">
-    <img mat-card-image *ngIf="movie.poster_path; else placeholder" class="images"
+  <div *ngFor="let movie of movies.results" class="movies-content" (click)="openMovieDetails(movie)">
+    <img matCardImage *ngIf="movie.poster_path; else placeholder" class="images"
          src="{{'https://image.tmdb.org/t/p/original/' + movie.poster_path}}" alt=""/>
-    <label class="movie-title" mat-card-title> {{movie.title}}</label>
+    <label class="movie-title" matCardTitle> {{movie.title}}</label>
 
   </div>
 </div>

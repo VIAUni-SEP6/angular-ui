@@ -23,22 +23,24 @@ export class ToplistComponent implements OnInit{
   }
 
   getToplist() {
-      this.backendService.getToplist().subscribe((value) => {
-          this.hasResults=true;
-          this.data = value;
+      this.backendService.getToplist().subscribe((topListResult:ToplistResultApiObject) => {
+          if(!!topListResult.data.movieID) {
+            this.hasResults = true;
+            this.data = topListResult;
+          }
         })
     }
 
     addToplist() {
-        this.backendService.addToplist(
-          this.addToplistGroup.get(this.toplistID)?.value).subscribe((value) => {
+        this.backendService.addMovieToToplist(
+          this.addToplistGroup.get(this.toplistID)?.value).subscribe(() => {
 
           })
       }
 
       deleteToplist() {
-              this.backendService.deleteToplist(
-                this.deleteToplistGroup.get(this.toplistID2)?.value).subscribe((value) => {
+              this.backendService.deleteMovieFromToplist(
+                this.deleteToplistGroup.get(this.toplistID2)?.value).subscribe(() => {
 
                 })
             }

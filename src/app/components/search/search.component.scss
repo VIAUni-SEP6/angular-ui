@@ -1,5 +1,5 @@
 .movies-wrapper{
-  overflow: auto;
+  overflow: hidden;
 }
 .movies-content{
   float:left;
@@ -16,4 +16,8 @@
 
 .movie-title {
   text-align: center;
+}
+
+.search-button{
+  color: white;
 }

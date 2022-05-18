@@ -31,6 +31,10 @@ import { ActorStatisticsComponent } from './components/actorStatistics/actorStat
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
+import { MatCarouselModule } from 'ng-mat-carousel';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,8 @@ import { MatSortModule } from '@angular/material/sort';
     SearchComponent,
     ToplistComponent,
     UserProfileComponent,
-    ActorStatisticsComponent
+    ActorStatisticsComponent,
+    MovieDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -64,8 +69,12 @@ import { MatSortModule } from '@angular/material/sort';
     ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatCarouselModule.forRoot()
   ],
+  entryComponents: [MovieDetailComponent],
   providers: [AuthService],
   bootstrap: [AppComponent]
 })

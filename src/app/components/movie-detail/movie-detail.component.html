@@ -1,0 +1,61 @@
+<div *ngIf="!isLoadingValue(); else loading" >
+  <h1 class="title" matDialogTitle>{{ data.title }}</h1>
+  <mat-dialog-content class="mat-dialog-content movies-content">
+    <div class="wrapper">
+      <div class="content1">
+        <img mat-card-image *ngIf="data.poster_path; else placeholder" class="images"
+             src="{{'https://image.tmdb.org/t/p/original/' + data.poster_path}}" alt=""/>
+      </div>
+      <div class="content2">
+        <label>Average rating: {{ data.vote_average }}</label>
+        <label>Popularity: {{ data.popularity }}</label>
+        <label>Director: </label>
+        <label>Release date: {{ data.release_date }}</label>
+        <label>Original language: {{ data.original_language }}</label>
+        <div>
+          <label>Overview: </label>{{ data.overview }}
+        </div>
+      </div>
+    </div>
+    <mat-carousel class="carousel"
+                  timings="750ms ease-in"
+                  [autoplay]="true"
+                  [hideArrows]="false"
+                  [loop]="true"
+                  [color]="'primary'">
+      <mat-carousel-slide *ngFor="let element of getCarouselArray()">
+        <ng-container *ngFor="let castMember of element">
+          <div class="carousel-elements">
+            <div class="picsum-img-wrapper">
+              <img *ngIf="castMember.profile_path; else placeholderPerson" class="actor-images"
+                   src="{{'https://image.tmdb.org/t/p/original/' + castMember.profile_path}}"
+                   alt="Random first slide">
+              <div class="actor-information">
+                <div>{{ castMember.name }}</div>
+                <div>{{castMember.character}}</div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </mat-carousel-slide>
+    </mat-carousel>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button *ngIf="!isMovieOnToplistValue()" mat-button class="bg-dark toplist-button" (click)="addToToplist()">Add to
+      toplist
+    </button>
+    <button *ngIf="isMovieOnToplistValue()" mat-button class="bg-dark toplist-button" (click)="deleteFromToplist()">
+      Delete from toplist
+    </button>
+    <button mat-button class="bg-light" (click)="close()">Close</button>
+  </mat-dialog-actions>
+</div>
+<ng-template #placeholder>
+  <img class="images" src="{{'assets/placeholder.png'}}" alt=""/>
+</ng-template>
+<ng-template #placeholderPerson>
+  <img class="actor-images" src="{{'assets/person-placeholder.jpg'}}" alt=""/>
+</ng-template>
+<ng-template #loading class="loading">
+  <img class="loading-image" src="{{'assets/loading.gif'}}" alt=""/>
+</ng-template>

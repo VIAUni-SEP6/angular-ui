@@ -1,0 +1,74 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.movies-content{
+  padding: 20px 40px 40px;
+  &__text {
+    display: inline;
+  }
+}
+.title {
+  text-align: center;
+}
+.container{
+  padding: 20px;
+}
+.content1 {
+  width: 30%;
+  float: left;
+}
+.content2 {
+  width: 70%;
+  float: left;
+}
+
+.images {
+  height: 300px;
+  border-radius: 8px;
+}
+.toplist-button{
+  color: white;
+}
+
+
+//above this, everything is absolutely necessary
+.carousel-slide-overlay {
+  padding-top: 16px;
+  align-content: center;
+  align-items: center;
+  align-self: center;
+}
+.actor-information {
+  max-width: 100px;
+}
+
+
+.button{
+  align-content: center;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+
+}
+
+.loading-image{
+  height: 300px;
+}
+
+.actor-images {
+  height: 150px;
+}
+
+.carousel-container {
+  display: flex;
+  justify-content: space-evenly;
+  overflow: hidden;
+  align-self: center;
+}
+
+.carousel-elements{
+  float:left;
+  padding: 16px;
+  align-items: center;
+
+}

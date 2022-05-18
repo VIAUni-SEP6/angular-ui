@@ -25,6 +25,40 @@ export interface MovieApiObject {
   video: boolean,
   vote_average: number
 }
+
+export interface MovieCreditsApiObject {
+  id: number,
+  cast: CastApiObject[],
+  crew: CrewApiObject[],
+}
+
+export interface CastApiObject {
+  adult: boolean,
+  gender: number | null,
+  id: number,
+  known_for_department: string,
+  name: string,
+  original_name: string,
+  popularity: number,
+  profile_path: string | null,
+  cast_id: number,
+  character: string,
+  credit_id: string,
+  order: number
+}
+
+export interface CrewApiObject {
+  adult: boolean,
+  gender: number | null,
+  id: number,
+  known_for_department: string,
+  name: string,
+  original_name: string,
+  popularity: number,
+  profile_path: string | null,
+  credit_id: string,
+  job: string
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -33,9 +67,13 @@ export class TmdbService {
   private apiKey = '1629f55fe2e85b91bf3b83337f2a7291';
 
   constructor(private httpClient: HttpClient) { }
-  public searchMovies(searchText: string): Observable<any> {
+  public searchMovies(searchText: string): Observable<SearchResultApiObject> {
     return this.httpClient.get<SearchResultApiObject>(
-      this.baseUrl+'/search/movie?api_key='+this.apiKey+'&query='+searchText.valueOf());
+      this.baseUrl+'/search/movie?api_key='+this.apiKey+'&query='+searchText);
+  }
+
+  public getMovieCredits(movieId: number): Observable<MovieCreditsApiObject> {
+    return this.httpClient.get<MovieCreditsApiObject>(this.baseUrl+'/movie/'+movieId+'/credits?api_key='+this.apiKey)
   }
 
   // private apiObjectToSearchResult(result: SearchResultApiObject) {

@@ -30,6 +30,12 @@
 
 
 //above this, everything is absolutely necessary
+.carousel-slide-overlay {
+  padding-top: 16px;
+  align-content: center;
+  align-items: center;
+  align-self: center;
+}
 .actor-information {
   max-width: 100px;
 }

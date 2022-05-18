@@ -19,6 +19,11 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link " (click)="setContent('dataTable')">
+              <i class="fas fa-heart" ></i>Actor Statistics
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link " (click)="setContent('userProfile')">
               <i class="fas fa-user"></i>User Profile
             </a>
@@ -35,6 +40,7 @@
       <div [ngSwitch]="(getContent() | async)">
         <app-search *ngSwitchCase="'search'"></app-search>
         <app-toplist *ngSwitchCase="'topList'"></app-toplist>
+        <app-actorStatistics *ngSwitchCase="'dataTable'"></app-actorStatistics>
         <app-user-profile *ngSwitchCase="'userProfile'"></app-user-profile>
       </div>
     </main>

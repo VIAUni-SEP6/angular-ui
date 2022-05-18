@@ -72,7 +72,7 @@ import { MatCarouselModule } from 'ng-mat-carousel';
     MatSortModule,
     MatDialogModule,
     MatButtonModule,
-    MatCarouselModule.forRoot()
+    MatCarouselModule.forRoot(),
   ],
   entryComponents: [MovieDetailComponent],
   providers: [AuthService],

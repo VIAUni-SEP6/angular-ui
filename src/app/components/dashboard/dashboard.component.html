@@ -9,12 +9,12 @@
       <div class="sidebar-sticky ">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" (click)="setContent('search')">
+            <a class="nav-link" [ngClass]="[getContent() === 'search' ? 'active' : '']" (click)="setContent('search')">
               <i class="fas fa-search"></i>Search
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " (click)="setContent('topList')">
+            <a class="nav-link " [ngClass]="[getContent() === 'topList' ? 'active' : '']" (click)="setContent('topList')">
               <i class="fas fa-heart" ></i>My toplist
             </a>
           </li>
@@ -24,7 +24,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " (click)="setContent('userProfile')">
+            <a class="nav-link " [ngClass]="[getContent() === 'userProfile' ? 'active' : '']" (click)="setContent('userProfile')">
               <i class="fas fa-user"></i>User Profile
             </a>
           </li>
@@ -37,7 +37,7 @@
       </div>
     </nav>
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <div [ngSwitch]="(getContent() | async)">
+      <div [ngSwitch]="getContent()">
         <app-search *ngSwitchCase="'search'"></app-search>
         <app-toplist *ngSwitchCase="'topList'"></app-toplist>
         <app-actorStatistics *ngSwitchCase="'dataTable'"></app-actorStatistics>

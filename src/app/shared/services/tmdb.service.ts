@@ -4,12 +4,12 @@ import {Observable} from 'rxjs';
 
 export interface SearchResultApiObject {
   page: number,
-  results: MovieApiObject[],
+  results: MovieSearchApiObject[],
   total_results: number,
   total_pages: number
 }
 
-export interface MovieApiObject {
+export interface MovieSearchApiObject {
   poster_path: string | null,
   adult: boolean,
   overview: string,
@@ -59,6 +59,11 @@ export interface CrewApiObject {
   credit_id: string,
   job: string
 }
+
+export interface MovieApiObject {
+
+
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -74,6 +79,21 @@ export class TmdbService {
 
   public getMovieCredits(movieId: number): Observable<MovieCreditsApiObject> {
     return this.httpClient.get<MovieCreditsApiObject>(this.baseUrl+'/movie/'+movieId+'/credits?api_key='+this.apiKey)
+  }
+  public getMovieById(movieId: number): Observable<MovieSearchApiObject> {
+    return this.httpClient.get<MovieSearchApiObject>(this.baseUrl+'/movie/'+movieId+'?api_key='+this.apiKey)
+  }
+
+  public getTopRatedMovies(): Observable<SearchResultApiObject> {
+    return this.httpClient.get<SearchResultApiObject>(this.baseUrl+'/movie/top_rated?api_key='+this.apiKey)
+  }
+
+  public getPopularMovies(): Observable<SearchResultApiObject> {
+    return this.httpClient.get<SearchResultApiObject>(this.baseUrl+'/movie/popular?api_key='+this.apiKey)
+  }
+
+  public getUpcomingMovies(): Observable<SearchResultApiObject> {
+    return this.httpClient.get<SearchResultApiObject>(this.baseUrl+'/movie/upcoming?api_key='+this.apiKey)
   }
 
   // private apiObjectToSearchResult(result: SearchResultApiObject) {

@@ -1,6 +1,11 @@
 import {Component, HostListener, Inject, OnDestroy, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {CastApiObject, MovieApiObject, MovieCreditsApiObject, TmdbService} from "../../shared/services/tmdb.service";
+import {
+  CastApiObject,
+  MovieSearchApiObject,
+  MovieCreditsApiObject,
+  TmdbService
+} from "../../shared/services/tmdb.service";
 import {BehaviorSubject, map, Subject, switchMap, takeUntil} from "rxjs";
 import {BackendService, ToplistResultApiObject} from "../../shared/services/backend.service";
 
@@ -15,15 +20,14 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
   private isMovieOnToplist = new BehaviorSubject<boolean>(false);
   private movieCredits = new BehaviorSubject<MovieCreditsApiObject | null>(null);
   private isLoading = new BehaviorSubject<boolean>(true);
-  private carouselArray= new BehaviorSubject<(CastApiObject[] | undefined) [] | null>(null) ;
+  private carouselArray = new BehaviorSubject<(CastApiObject[] | undefined) [] | null>(null);
 
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: MovieApiObject,
-    private mdDialogRef: MatDialogRef<MovieDetailComponent, MovieApiObject>,
+    @Inject(MAT_DIALOG_DATA) public data: MovieSearchApiObject,
+    private mdDialogRef: MatDialogRef<MovieDetailComponent, MovieSearchApiObject>,
     private topListService: BackendService,
     public tmdbService: TmdbService) {
-
   }
 
   ngOnInit(): void {
@@ -37,14 +41,13 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         this.movieCredits.next(movieCredits);
         this.carouselArray.next(this.createCarouselArray());
       })
-    ).subscribe(() => {
-      this.isLoading.next(false);
-    });
+    ).subscribe(() => this.isLoading.next(false));
+
 
   }
 
-  createCarouselArray(): (CastApiObject[] | undefined) []{
-    const array =[];
+  createCarouselArray(): (CastApiObject[] | undefined) [] {
+    const array = [];
     if (this.getMovieCredits()?.cast) {
       // @ts-ignore
       for (let i = 0; i < this.getMovieCredits()?.cast.length; i += 5) {
@@ -52,22 +55,23 @@ export class MovieDetailComponent implements OnInit, OnDestroy {
         array.push(chunk);
       }
     }
-    console.log(array)
     return array;
   }
 
-/*  getTopList() {
-    this.topListService.getToplist().pipe(takeUntil(this.onDestroy$)).subscribe((toplistResult: ToplistResultApiObject) => {
-      this.isMovieOnToplist.next(toplistResult.data.movieID.some(movieId => movieId.toString() === this.data.id.toString()));
-      this.isLoading.next(false);
-    });
+  getDirectors() {
+    const directors = this.getMovieCredits()?.crew.filter(value => value.job === 'Director');
+    let result = ''
+    if (directors) {
+      for (let i = 0; i < directors.length; i++) {
+        if (i === directors.length-1) {
+          result += directors[i].name;
+        } else {
+          result += directors[i].name+', ';
+        }
+      }
+    }
+    return result;
   }
-
-  getMovieCredits() {
-    this.tmdbService.getMovieCredits(this.data.id).subscribe((value: MovieCreditsApiObject) => {
-
-    })
-  }*/
 
   public close(): void {
     this.mdDialogRef.close();

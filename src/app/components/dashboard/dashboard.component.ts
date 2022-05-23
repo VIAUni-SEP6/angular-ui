@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../shared/services/auth.service';
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject} from "rxjs";
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -12,11 +12,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {}
 
   setContent(newContent: string) {
-    console.log('changed to '+newContent)
     this.currentContent.next(newContent);
   }
 
-  getContent():Observable<string>{
-    return this.currentContent.asObservable();
+  getContent(){
+    return this.currentContent.getValue();
   }
 }

@@ -1,20 +1,83 @@
-<div class="example-form" [formGroup]="searchFormGroup">
-  <mat-form-field class="mat-form-field-appearance-fill" appearance="outline">
-    <div>
+<div class="search-container">
+<div class="form" [formGroup]="searchFormGroup">
+    <mat-form-field class="mat-form-field-appearance-fill" appearance="outline">
       <label>Search for a movie</label>
       <input formControlName="{{ searchTextControlName }}" matInput type="text" placeholder="Ex. Transformers">
-    </div>
-  </mat-form-field>
-</div>
-<button mat-button class="bg-dark search-button" (click)="searchMovies()">Search</button>
-<div *ngIf="hasResults" class="movies-wrapper">
-  <div *ngFor="let movie of movies.results" class="movies-content" (click)="openMovieDetails(movie)">
-    <img matCardImage *ngIf="movie.poster_path; else placeholder" class="images"
-         src="{{'https://image.tmdb.org/t/p/original/' + movie.poster_path}}" alt=""/>
-    <label class="movie-title" matCardTitle> {{movie.title}}</label>
-
+    </mat-form-field>
+  </div>
+  <div class="search">
+  <button mat-button class="bg-dark search-button" (click)="searchMovies()">Search</button>
+  <button mat-button class="bg-dark search-button" (click)="reset()">Reset</button>
   </div>
 </div>
-<ng-template #placeholder>
+
+<div *ngIf="hasResults; else placeholder" class="movies-wrapper">
+    <div *ngFor="let movie of movies.results" class="movies-content" (click)="openMovieDetails(movie)">
+      <img matCardImage *ngIf="movie.poster_path; else placeholderImage" class="images"
+           src="{{'https://image.tmdb.org/t/p/original/' + movie.poster_path}}" alt=""/>
+      <label class="movie-title" matCardTitle> {{movie.title}}</label>
+
+    </div>
+</div>
+
+<ng-template #placeholderImage>
   <img class="images" src="{{'assets/placeholder.png'}}" alt=""/>
+</ng-template>
+<ng-template #placeholder>
+  <div *ngIf="!isLoadingValue()">
+    <h1 class="title">Popular Movies</h1>
+    <mat-carousel class="carousel"
+                  timings="750ms ease-in"
+                  [autoplay]="true"
+                  [hideArrows]="false"
+                  [loop]="true"
+                  [color]="'primary'">
+      <mat-carousel-slide *ngFor="let element of getPopularMoviesCarouselArray()">
+        <ng-container *ngFor="let movie of element" >
+          <div class="carousel-elements" (click)="openMovieDetails(movie)">
+              <img *ngIf="movie.poster_path; else placeholderImage" class="actor-images"
+                   src="{{'https://image.tmdb.org/t/p/original/' + movie.poster_path}}"
+                   alt="Random first slide">
+              <div class="movie-name">{{ movie.title }}</div>
+          </div>
+        </ng-container>
+      </mat-carousel-slide>
+    </mat-carousel>
+    <h1 class="title">Top Rated Movies</h1>
+    <mat-carousel class="carousel"
+                  timings="750ms ease-in"
+                  [autoplay]="true"
+                  [hideArrows]="false"
+                  [loop]="true"
+                  [color]="'primary'">
+      <mat-carousel-slide *ngFor="let element of getTopRatedMoviesCarouselArray()">
+        <ng-container *ngFor="let movie of element">
+          <div class="carousel-elements" (click)="openMovieDetails(movie)">
+              <img *ngIf="movie.poster_path; else placeholderImage" class="actor-images"
+                   src="{{'https://image.tmdb.org/t/p/original/' + movie.poster_path}}"
+                   alt="Random first slide">
+              <div class="movie-name">{{ movie.title }}</div>
+          </div>
+        </ng-container>
+      </mat-carousel-slide>
+    </mat-carousel>
+    <h1 class="title">Upcoming Movies</h1>
+    <mat-carousel class="carousel"
+                  timings="750ms ease-in"
+                  [autoplay]="true"
+                  [hideArrows]="false"
+                  [loop]="true"
+                  [color]="'primary'">
+      <mat-carousel-slide *ngFor="let element of getUpcomingMoviesCarouselArray()">
+        <ng-container *ngFor="let movie of element">
+          <div class="carousel-elements" (click)="openMovieDetails(movie)">
+              <img *ngIf="movie.poster_path; else placeholderImage" class="actor-images"
+                   src="{{'https://image.tmdb.org/t/p/original/' + movie.poster_path}}"
+                   alt="Random first slide">
+              <div class="movie-name">{{ movie.title }}</div>
+          </div>
+        </ng-container>
+      </mat-carousel-slide>
+    </mat-carousel>
+  </div>
 </ng-template>

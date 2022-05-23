@@ -9,7 +9,7 @@
       <div class="content2">
         <label>Average rating: {{ data.vote_average }}</label>
         <label>Popularity: {{ data.popularity }}</label>
-        <label>Director: </label>
+        <label>Director(s): {{ getDirectors() }}</label>
         <label>Release date: {{ data.release_date }}</label>
         <label>Original language: {{ data.original_language }}</label>
         <div>
@@ -26,15 +26,10 @@
       <mat-carousel-slide *ngFor="let element of getCarouselArray()">
         <ng-container *ngFor="let castMember of element">
           <div class="carousel-elements">
-            <div class="picsum-img-wrapper">
               <img *ngIf="castMember.profile_path; else placeholderPerson" class="actor-images"
                    src="{{'https://image.tmdb.org/t/p/original/' + castMember.profile_path}}"
                    alt="Random first slide">
-              <div class="actor-information">
-                <div>{{ castMember.name }}</div>
-                <div>{{castMember.character}}</div>
-              </div>
-            </div>
+              <div class="actor-name">{{ castMember.name }}</div>
           </div>
         </ng-container>
       </mat-carousel-slide>

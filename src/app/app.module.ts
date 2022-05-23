@@ -27,6 +27,10 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {ReactiveFormsModule} from "@angular/forms";
+import { ActorStatisticsComponent } from './components/actorStatistics/actorStatistics.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
@@ -44,6 +48,7 @@ import { MatCarouselModule } from 'ng-mat-carousel';
     SearchComponent,
     ToplistComponent,
     UserProfileComponent,
+    ActorStatisticsComponent,
     MovieDetailComponent
   ],
   imports: [
@@ -62,6 +67,9 @@ import { MatCarouselModule } from 'ng-mat-carousel';
     MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
     MatDialogModule,
     MatButtonModule,
     MatCarouselModule.forRoot(),

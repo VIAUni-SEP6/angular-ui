@@ -3,21 +3,73 @@
 }
 .movies-content{
   float:left;
-  border: 5px black;
   width: 175px;
   height: 300px;
   padding: 16px;
   align-content: center;
+  border: 2px solid darkblue;
+  border-radius: 8px;
+  margin: 16px;
+  overflow: hidden;
 }
 
 .images {
   height: 200px;
+  border: 20px black;
+  border-radius: 8px;
 }
 
 .movie-title {
+  padding-top: 8px;
   text-align: center;
+  max-height: 300px;
 }
 
 .search-button{
   color: white;
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-bottom: 16px;
+}
+
+.carousel ::ng-deep .carousel-slide-content {
+  position: relative;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.carousel-elements{
+  float:left;
+  padding: 16px;
+  align-items: center;
+
+}
+.actor-images {
+  height: 150px;
+  border-radius: 8px;
+}
+
+.movie-name {
+  max-width: 100px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+.search-container {
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.search, .form {
+  float: left;
+
+}
+
+.search {
+  margin-top: 18.75px;
 }

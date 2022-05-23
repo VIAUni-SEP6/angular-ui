@@ -28,10 +28,7 @@ export class AuthService {
         JSON.parse(localStorage.getItem('user')!);
         user.getIdToken().then((idToken)=>{
            this.userIdToken = idToken;
-           console.log("Here I get the user token correctly: ", this.userIdToken);
-           console.log(typeof(this.userIdToken)); // ‘userIdToken’ type is ‘string’
          });
-         console.log("Here the variable ‘userIdToken’ is undefined: ", this.userIdToken);
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);

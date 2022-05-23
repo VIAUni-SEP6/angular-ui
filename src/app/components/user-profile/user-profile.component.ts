@@ -7,10 +7,12 @@ import {AuthService} from "../../shared/services/auth.service";
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
+  photoURL:string;
 
   constructor(public authService:AuthService) { }
 
   ngOnInit(): void {
+    this.photoURL=this.authService.userData.photoURL;
   }
 
 }

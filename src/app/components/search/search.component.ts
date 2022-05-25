@@ -1,9 +1,11 @@
 import {OnInit, Component, HostListener} from '@angular/core';
-import {MovieSearchApiObject, SearchResultApiObject, TmdbService} from "../../shared/services/tmdb.service";
+import {TmdbService} from "../../shared/services/tmdb.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {MovieDetailComponent} from "../movie-detail/movie-detail.component";
 import {BehaviorSubject, map, switchMap} from "rxjs";
+import {SearchResultApiObject} from "../../shared/models/tmdb/SearchResultApiObject";
+import {MovieSearchApiObject} from "../../shared/models/tmdb/MovieSearchApiObject";
 
 @Component({
   selector: 'app-search',

@@ -6,7 +6,7 @@
 <div class="container-fluid">
   <div class="row">
     <nav class="col-md-2 d-md-block bg-light sidebar">
-      <div class="sidebar-sticky ">
+      <div class="sidebar-sticky">
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link" [ngClass]="[getContent() === 'search' ? 'active' : '']" (click)="setContent('search')">
@@ -19,8 +19,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link " (click)="setContent('dataTable')">
-              <i class="fas fa-heart" ></i>Actor Statistics
+            <a class="nav-link " [ngClass]="[getContent() === 'dataTable' ? 'active' : '']" (click)="setContent('dataTable')">
+              <i class="fas fa-chart-bar" ></i>Actor Statistics
             </a>
           </li>
           <li class="nav-item">

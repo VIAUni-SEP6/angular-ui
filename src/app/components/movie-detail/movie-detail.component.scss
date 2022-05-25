@@ -44,15 +44,10 @@
 .actor-name{
   max-width: 100px;
 }
-//above this, everything is absolutely necessary
-.button{
-  align-content: center;
-}
 
-.loading {
-  display: flex;
-  align-items: center;
-
+.loading-image-container{
+  display:flex;
+  justify-content: center;
 }
 
 .loading-image{
@@ -60,8 +55,7 @@
 }
 
 .carousel-elements{
-  float:left;
   padding: 16px;
-  align-items: center;
-
 }
+
+

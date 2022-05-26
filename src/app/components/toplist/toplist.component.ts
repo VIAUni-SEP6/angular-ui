@@ -1,51 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../../shared/services/auth.service";
-import {ToplistResultApiObject, BackendService} from "../../shared/services/backend.service";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {BehaviorSubject, map} from "rxjs";
-import {MovieSearchApiObject, TmdbService} from "../../shared/services/tmdb.service";
+import {FormBuilder} from "@angular/forms";
+import {BehaviorSubject, map, Subject, takeUntil} from "rxjs";
+import {TmdbService} from "../../shared/services/tmdb.service";
 import {MovieDetailComponent} from "../movie-detail/movie-detail.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {ToplistStore} from "../../shared/stores/toplist-store";
+import {MovieSearchApiObject} from "../../shared/models/tmdb/MovieSearchApiObject";
+import {ToplistResultApiObject} from "../../shared/models/backend/ToplistResultApiObject";
 
 @Component({
   selector: 'app-toplist',
   templateUrl: './toplist.component.html',
   styleUrls: ['./toplist.component.scss']
 })
-export class ToplistComponent implements OnInit{
-  hasResults = false;
+export class ToplistComponent implements OnInit, OnDestroy {
+  hasResults: boolean;
   data: ToplistResultApiObject;
-  addToplistGroup: FormGroup;
-  deleteToplistGroup: FormGroup;
-  toplistID = 'searchText';
-  toplistID2 = 'searchText';
   private dialogRef: MatDialogRef<MovieDetailComponent, MovieSearchApiObject>;
-  public moviesOnToplist = new BehaviorSubject<MovieSearchApiObject[] | null>(null)
+  public moviesOnToplist = new BehaviorSubject<MovieSearchApiObject[]>([]);
+  private onDestroy$ = new Subject();
+  public movies: MovieSearchApiObject[];
 
   constructor(
-    public backendService: BackendService,
-    public authService:AuthService,
+    public authService: AuthService,
     public formBuilder: FormBuilder,
     public tmdbService: TmdbService,
-    private dialog: MatDialog) { }
-
-  ngOnInit(): void {
-    this.buildFormGroup();
-    this.backendService.getToplist()
-      .pipe(
-        map((value:ToplistResultApiObject) => {
-          let movies: MovieSearchApiObject[] = [];
-          for (let i = 0; i < value.data.movieID.length; i++) {
-            this.tmdbService.getMovieById(value.data.movieID[i]).subscribe(value1 => {
-              movies.push(value1);
-            })
-          }
-          this.moviesOnToplist.next(movies);
-        })).subscribe(() => this.hasResults=true);
+    private dialog: MatDialog,
+    private toplistStore: ToplistStore) {
   }
 
-  getMoviesOnToplist() {
-    return this.moviesOnToplist.getValue();
+  ngOnInit(): void {
+    this.toplistStore.getToplistChanges$()
+      .pipe(
+        takeUntil(this.onDestroy$),
+        map((moviesFromStore: MovieSearchApiObject[] | null) => {
+          if (moviesFromStore === null) {
+            this.toplistStore.refreshToplist();
+          } else {
+            this.moviesOnToplist.next(moviesFromStore);
+          }
+        }),
+      )
+      .subscribe(() => this.hasResults = true);
+
   }
 
   openMovieDetails(movie: MovieSearchApiObject) {
@@ -58,12 +56,9 @@ export class ToplistComponent implements OnInit{
 
   }
 
-  private buildFormGroup(): void {
-    this.addToplistGroup = this.formBuilder.group({
-      [this.toplistID]: null
-    })
-    this.deleteToplistGroup = this.formBuilder.group({
-          [this.toplistID2]: null
-        })
+  ngOnDestroy(): void {
+    this.hasResults = false;
+    this.onDestroy$.next('');
+    this.onDestroy$.complete();
   }
 }

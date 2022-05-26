@@ -1,25 +1,23 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { SignUpComponent } from './sign-up.component';
+import {TestUtilities} from "../../shared/test/TestUtilities";
 
 describe('SignUpComponent', () => {
-  let component: SignUpComponent;
-  let fixture: ComponentFixture<SignUpComponent>;
+  let signUpComponent: SignUpComponent;
+
+  const authServiceSpy = TestUtilities.createAuthServiceSpy();
 
   beforeEach(async () => {
+    signUpComponent = new SignUpComponent(authServiceSpy);
     await TestBed.configureTestingModule({
-      declarations: [ SignUpComponent ]
+      declarations: []
     })
     .compileComponents();
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SignUpComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(signUpComponent).toBeTruthy();
   });
 });

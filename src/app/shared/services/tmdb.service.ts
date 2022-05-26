@@ -1,69 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
+import {SearchResultApiObject} from "../models/tmdb/SearchResultApiObject";
+import {MovieCreditsApiObject} from "../models/tmdb/MovieCreditsApiObject";
+import {MovieSearchApiObject} from "../models/tmdb/MovieSearchApiObject";
 
-export interface SearchResultApiObject {
-  page: number,
-  results: MovieSearchApiObject[],
-  total_results: number,
-  total_pages: number
-}
-
-export interface MovieSearchApiObject {
-  poster_path: string | null,
-  adult: boolean,
-  overview: string,
-  release_date: string,
-  genre_ids: number[],
-  id: number,
-  original_title: string,
-  original_language: string,
-  title: string,
-  backdrop_path: string | null,
-  popularity: number,
-  vote_count: number,
-  video: boolean,
-  vote_average: number
-}
-
-export interface MovieCreditsApiObject {
-  id: number,
-  cast: CastApiObject[],
-  crew: CrewApiObject[],
-}
-
-export interface CastApiObject {
-  adult: boolean,
-  gender: number | null,
-  id: number,
-  known_for_department: string,
-  name: string,
-  original_name: string,
-  popularity: number,
-  profile_path: string | null,
-  cast_id: number,
-  character: string,
-  credit_id: string,
-  order: number
-}
-
-export interface CrewApiObject {
-  adult: boolean,
-  gender: number | null,
-  id: number,
-  known_for_department: string,
-  name: string,
-  original_name: string,
-  popularity: number,
-  profile_path: string | null,
-  credit_id: string,
-  job: string
-}
-
-export interface MovieApiObject {
-
-
-}
 @Injectable({
   providedIn: 'root'
 })
@@ -95,12 +36,4 @@ export class TmdbService {
   public getUpcomingMovies(): Observable<SearchResultApiObject> {
     return this.httpClient.get<SearchResultApiObject>(this.baseUrl+'/movie/upcoming?api_key='+this.apiKey)
   }
-
-  // private apiObjectToSearchResult(result: SearchResultApiObject) {
-  //
-  //
-  // }
-  // private apiObjectToMovieResult(result: MovieApiObject) {
-  //
-  // }
 }

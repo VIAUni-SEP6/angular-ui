@@ -1,25 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { VerifyEmailComponent } from './verify-email.component';
+import {TestUtilities} from "../../shared/test/TestUtilities";
 
 describe('VerifyEmailComponent', () => {
-  let component: VerifyEmailComponent;
-  let fixture: ComponentFixture<VerifyEmailComponent>;
+  let verifyEmailComponent: VerifyEmailComponent;
+
+  const authServiceSpy = TestUtilities.createAuthServiceSpy();
 
   beforeEach(async () => {
+    verifyEmailComponent = new VerifyEmailComponent(authServiceSpy);
     await TestBed.configureTestingModule({
-      declarations: [ VerifyEmailComponent ]
+      declarations: []
     })
     .compileComponents();
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(VerifyEmailComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(verifyEmailComponent).toBeTruthy();
   });
 });

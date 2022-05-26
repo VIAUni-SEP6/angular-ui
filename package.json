@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test --watch false --browsers=ChromeHeadless"
   },
   "private": true,
   "dependencies": {
@@ -24,6 +24,7 @@
     "bootstrap": "^5.1.3",
     "firebase": "9.7.0",
     "ng-mat-carousel": "^0.11.1",
+    "puppeteer": "^14.1.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

@@ -1,4 +1,4 @@
-<div *ngIf="!isLoadingValue(); else loading" >
+<div *ngIf="!isLoadingValue(); else loading">
   <h1 class="title" matDialogTitle>{{ data.title }}</h1>
   <mat-dialog-content class="mat-dialog-content movies-content">
     <div class="wrapper">
@@ -26,10 +26,10 @@
       <mat-carousel-slide *ngFor="let element of getCarouselArray()">
         <ng-container *ngFor="let castMember of element">
           <div class="carousel-elements">
-              <img *ngIf="castMember.profile_path; else placeholderPerson" class="actor-images"
-                   src="{{'https://image.tmdb.org/t/p/original/' + castMember.profile_path}}"
-                   alt="Random first slide">
-              <div class="actor-name">{{ castMember.name }}</div>
+            <img *ngIf="castMember.profile_path; else placeholderPerson" class="actor-images"
+                 src="{{'https://image.tmdb.org/t/p/original/' + castMember.profile_path}}"
+                 alt="Random first slide">
+            <div class="actor-name">{{ castMember.name }}</div>
           </div>
         </ng-container>
       </mat-carousel-slide>
@@ -51,6 +51,8 @@
 <ng-template #placeholderPerson>
   <img class="actor-images" src="{{'assets/person-placeholder.jpg'}}" alt=""/>
 </ng-template>
-<ng-template #loading class="loading">
-  <img class="loading-image" src="{{'assets/loading.gif'}}" alt=""/>
+<ng-template #loading>
+  <div class="loading-image-container">
+    <img class="loading-image" src="{{'assets/loading.gif'}}" alt=""/>
+  </div>
 </ng-template>

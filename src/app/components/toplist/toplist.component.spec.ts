@@ -1,25 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { ToplistComponent } from './toplist.component';
+import {TestUtilities} from "../../shared/test/TestUtilities";
+import {FormBuilder} from "@angular/forms";
 
 describe('ToplistComponent', () => {
-  let component: ToplistComponent;
-  let fixture: ComponentFixture<ToplistComponent>;
+  const authServiceSpy = TestUtilities.createAuthServiceSpy();
+  const tmdbServiceSpy = TestUtilities.createTmdbServiceSpy();
+  const matDialogSpy = TestUtilities.createMatDialogServiceSpy();
+  const toplistStoreSpy = TestUtilities.createToplistStoreSpy();
+
+  let toplistComponent: ToplistComponent;
 
   beforeEach(async () => {
+    toplistComponent = new ToplistComponent(authServiceSpy, new FormBuilder(), tmdbServiceSpy, matDialogSpy, toplistStoreSpy)
     await TestBed.configureTestingModule({
-      declarations: [ ToplistComponent ]
-    })
-    .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ToplistComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+      declarations: []
+    });
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(toplistComponent).toBeTruthy();
   });
 });

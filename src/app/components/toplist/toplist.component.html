@@ -1,18 +1,18 @@
-<div>
-<h1 class="h2">TopList</h1>
-  <div *ngIf="hasResults; else placeholder" class="movies-wrapper">
-    <div *ngFor="let movie of getMoviesOnToplist()" class="movies-content" (click)="openMovieDetails(movie)">
+<h1 class="title">TopList</h1>
+  <div *ngIf="hasResults; else loading" class="movies-wrapper">
+    <div *ngFor="let movie of moviesOnToplist | async" class="movies-content" (click)="openMovieDetails(movie)">
       <img matCardImage *ngIf="movie.poster_path; else placeholderImage" class="images"
            src="{{'https://image.tmdb.org/t/p/original/' + movie.poster_path}}" alt=""/>
       <label class="movie-title" matCardTitle> {{movie.title}}</label>
 
     </div>
   </div>
-</div>
 <ng-template #placeholderImage>
   <img class="images" src="{{'assets/placeholder.png'}}" alt=""/>
 </ng-template>
-<ng-template #placeholder>
-
+<ng-template #loading class="loading">
+  <div class="loading-image-container">
+    <img class="loading-image" src="{{'assets/loading.gif'}}" alt=""/>
+  </div>
 </ng-template>
 

@@ -1,25 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
+import {TestUtilities} from "../../shared/test/TestUtilities";
 
 describe('DashboardComponent', () => {
-  let component: DashboardComponent;
-  let fixture: ComponentFixture<DashboardComponent>;
+  let dashboardComponent: DashboardComponent;
+
+  const authServiceSpy = TestUtilities.createAuthServiceSpy();
 
   beforeEach(async () => {
+    dashboardComponent = new DashboardComponent(authServiceSpy)
     await TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ]
+      declarations: [],
+      providers: [],
+      imports: [],
     })
     .compileComponents();
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DashboardComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(dashboardComponent).toBeTruthy();
   });
 });

@@ -1,25 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {TestBed } from '@angular/core/testing';
 
 import { ActorStatisticsComponent } from './actorStatistics.component';
+import {TestUtilities} from "../../shared/test/TestUtilities";
 
 describe('ActorStatisticsComponent', () => {
-  let component: ActorStatisticsComponent;
-  let fixture: ComponentFixture<ActorStatisticsComponent>;
+  let actorStatisticsComponent: ActorStatisticsComponent;
+
+  const statisticsServiceSpy = TestUtilities.createStatisticsServiceSpy();
+  const liveAnnouncerSpy = TestUtilities.createLiveAnnouncerSpy();
 
   beforeEach(async () => {
+    actorStatisticsComponent = new ActorStatisticsComponent(statisticsServiceSpy,liveAnnouncerSpy);
     await TestBed.configureTestingModule({
-      declarations: [ ActorStatisticsComponent ]
+      declarations: [],
+      providers: []
     })
     .compileComponents();
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ActorStatisticsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(actorStatisticsComponent).toBeTruthy();
   });
 });

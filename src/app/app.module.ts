@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,18 +19,18 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {AuthService} from "./shared/services/auth.service";
-import { HttpClientModule } from '@angular/common/http';
-import { SearchComponent } from './components/search/search.component';
-import { ToplistComponent } from './components/toplist/toplist.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import {HttpClientModule} from '@angular/common/http';
+import {SearchComponent} from './components/search/search.component';
+import {ToplistComponent} from './components/toplist/toplist.component';
+import {UserProfileComponent} from './components/user-profile/user-profile.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import {ReactiveFormsModule} from "@angular/forms";
-import { ActorStatisticsComponent } from './components/actorStatistics/actorStatistics.component';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
+import {ActorStatisticsComponent} from './components/actorStatistics/actorStatistics.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
+import {MovieDetailComponent} from './components/movie-detail/movie-detail.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import { MatCarouselModule } from 'ng-mat-carousel';

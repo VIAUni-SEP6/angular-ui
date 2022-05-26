@@ -1,25 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { UserProfileComponent } from './user-profile.component';
+import {TestUtilities} from "../../shared/test/TestUtilities";
 
 describe('UserProfileComponent', () => {
-  let component: UserProfileComponent;
-  let fixture: ComponentFixture<UserProfileComponent>;
+  let userProfileComponent: UserProfileComponent;
+
+  const authServiceSpy = TestUtilities.createAuthServiceSpy();
 
   beforeEach(async () => {
+    userProfileComponent = new UserProfileComponent(authServiceSpy);
     await TestBed.configureTestingModule({
-      declarations: [ UserProfileComponent ]
+      declarations: []
     })
     .compileComponents();
   });
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(UserProfileComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(userProfileComponent).toBeTruthy();
   });
 });

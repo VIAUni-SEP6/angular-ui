@@ -5,6 +5,9 @@ import {MovieCreditsApiObject} from "../models/tmdb/MovieCreditsApiObject";
 import {SearchResultApiObject} from "../models/tmdb/SearchResultApiObject";
 import {ToplistApiObject} from "../models/backend/ToplistApiObject";
 import {ToplistResultApiObject} from "../models/backend/ToplistResultApiObject";
+import {MoviePlayedApiObject} from "../models/statistics/MoviePlayedApiObject";
+import {ActorStatisticsResultApiObject} from "../models/statistics/ActorStatisticsResultApiObject";
+import {ActorApiObject} from "../models/statistics/ActorApiObject";
 
 export const movieSearch: MovieSearchApiObject[] = [
   {
@@ -56,6 +59,7 @@ export const movieSearch: MovieSearchApiObject[] = [
     vote_average: 4
   }
 ];
+
 function createCastArray(): CastApiObject[] {
   return [
     {
@@ -160,4 +164,39 @@ const toplist: ToplistApiObject = {
 }
 export const toplistResult: ToplistResultApiObject = {
   data: toplist
+}
+
+const moviePlayed: MoviePlayedApiObject[] = [{
+    poster_path: null,
+    adult: false,
+    overview: '',
+    release_date: '',
+    original_title: '',
+    genre_ids: [],
+    id: 2,
+    media_type: '',
+    original_language: '',
+    title: '',
+    backdrop_path: null,
+    popularity: 1,
+    vote_count: 1,
+    video: false,
+    vote_average: 1
+  }];
+
+const actor: ActorApiObject[] = [{
+  profile_path: null,
+  adult: true,
+  id: 1,
+  known_for: moviePlayed,
+  name: '',
+  popularity: 1,
+  average_movie_rating: 1
+}];
+
+export const actorStatisticsResult: ActorStatisticsResultApiObject = {
+  page: 1,
+  results: actor,
+  total_results: 1,
+  total_pages: 1
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, map, Subject, switchMap} from 'rxjs';
 import {AuthService} from "./auth.service";
 import {ToplistResultApiObject} from "../models/backend/ToplistResultApiObject";
 
@@ -13,12 +13,19 @@ export class BackendService {
 
   public getToplist(): Observable<ToplistResultApiObject>{
     let url = this.baseUrl + 'getFavouriteMovies';
-    let token = this.authService.userIdToken;
-    return this.httpClient.get<ToplistResultApiObject>(url,{ headers: {"Authorization" : `Bearer ${token}`}});
+    let resultTest:any;
+    this.authService.GetIdToken()
+    .pipe(
+    switchMap((idToken:any) => {
+    return this.httpClient.get<ToplistResultApiObject>(url, {headers: {"Authorization" : 'Bearer ${idToken}'}});
+    }),
+    ).subscribe((result:any) => {resultTest = result});
+    return resultTest;
   }
 
   public addMovieToToplist(movieId: string): Observable<any> {
       let url = this.baseUrl+'addFavouriteMovie'+'/'+movieId.valueOf();
+      this.authService.GetIdToken();
       let token = this.authService.userIdToken;
       const headers = {"Authorization" : `Bearer ${token}`};
       return this.httpClient.get<any>(url, { headers});
@@ -26,6 +33,7 @@ export class BackendService {
 
     public deleteMovieFromToplist(movieId: string): Observable<any> {
           let url = this.baseUrl+'deleteFavouriteMovie'+'/'+movieId.valueOf();
+          this.authService.GetIdToken();
           let token = this.authService.userIdToken;
           const headers = {"Authorization" : `Bearer ${token}`};
           return this.httpClient.get<any>(url, { headers});

@@ -24,14 +24,17 @@ export class AuthService {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
-        user.getIdToken().then((idToken)=>{
-           this.userIdToken = idToken;
-         });
       } else {
         localStorage.setItem('user', 'null');
         JSON.parse(localStorage.getItem('user')!);
       }
     });
+  }
+  GetIdToken(){
+      this.userData.getIdToken().then((idToken:any)=>{
+              this.userIdToken = idToken;
+       });
+       return this.userIdToken;
   }
   SignIn(email: string, password: string) {
     return this.afAuth

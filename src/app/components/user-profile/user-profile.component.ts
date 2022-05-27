@@ -12,7 +12,7 @@ export class UserProfileComponent implements OnInit {
   constructor(public authService:AuthService) { }
 
   ngOnInit(): void {
-    this.photoURL=this.authService.userData.photoURL;
+    this.photoURL = this.authService.userData.photoURL;
   }
 
 }

@@ -2,7 +2,6 @@ import SpyObj = jasmine.SpyObj;
 import {AuthService} from "../services/auth.service";
 import createSpyObj = jasmine.createSpyObj;
 import {TmdbService} from "../services/tmdb.service";
-import {MatDialog} from "@angular/material/dialog";
 import {ToplistStore} from "../stores/toplist-store";
 import {BackendService} from "../services/backend.service";
 import {StatisticsService} from "../services/statistics.service";
@@ -14,11 +13,7 @@ export class TestUtilities {
   }
 
   static createTmdbServiceSpy(): SpyObj<TmdbService> {
-    return createSpyObj<TmdbService>('TmdbService', ['getMovieCredits', 'getMovieById', 'getTopRatedMovies', 'getPopularMovies', 'getUpcomingMovies']);
-  }
-
-  static createMatDialogServiceSpy(): SpyObj<MatDialog> {
-    return createSpyObj<MatDialog>('MatDialog', ['open']);
+    return createSpyObj<TmdbService>('TmdbService', ['searchMovies','getMovieCredits', 'getMovieById', 'getTopRatedMovies', 'getPopularMovies', 'getUpcomingMovies']);
   }
 
   static createToplistStoreSpy(): SpyObj<ToplistStore> {

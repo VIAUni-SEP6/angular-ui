@@ -26,7 +26,7 @@ export class SearchComponent implements OnInit {
   private topRatedMovies = new BehaviorSubject<SearchResultApiObject | null>(null)
   private topRatedMoviesCarouselArray= new BehaviorSubject<(MovieSearchApiObject[] | undefined) [] | null>(null) ;
 
-  constructor(public tmdbService: TmdbService, public formBuilder: FormBuilder, private dialog: MatDialog) {
+  constructor(public tmdbService: TmdbService, public formBuilder: FormBuilder, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {

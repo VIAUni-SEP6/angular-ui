@@ -21,4 +21,8 @@ describe('DashboardComponent', () => {
   it('should create', () => {
     expect(dashboardComponent).toBeTruthy();
   });
+  it('should set content', () => {
+    dashboardComponent.setContent('new content');
+    expect(dashboardComponent.getContent()).toEqual('new content');
+  });
 });

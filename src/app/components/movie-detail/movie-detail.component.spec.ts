@@ -9,8 +9,7 @@ import {ToplistStore} from "../../shared/stores/toplist-store";
 import {TmdbService} from "../../shared/services/tmdb.service";
 import {BackendService} from "../../shared/services/backend.service";
 import {of} from "rxjs";
-import {ToplistResultApiObject} from "../../shared/models/backend/ToplistResultApiObject";
-import {ToplistApiObject} from "../../shared/models/backend/ToplistApiObject";
+import {movieCredits, toplistResult} from "../../shared/test/TestData";
 
 describe('MovieDetailComponent', () => {
   let movieDetailComponent: MovieDetailComponent;
@@ -36,12 +35,8 @@ describe('MovieDetailComponent', () => {
     video: false,
     vote_average: 6
   }
-  const toplist: ToplistApiObject = {
-    movieID: []
-  }
-  const toplistResult: ToplistResultApiObject = {
-    data: toplist
-  }
+
+
 
   beforeEach(async () => {
     dialogRef = createSpyObj('MatDialogRef', ['close'])
@@ -61,11 +56,33 @@ describe('MovieDetailComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MovieDetailComponent);
     movieDetailComponent = fixture.componentInstance;
-    backendServiceSpy.getToplist.and.returnValue(of(toplistResult))
+    backendServiceSpy.getToplist.and.returnValue(of(toplistResult));
+    tmdbServiceSpy.getMovieCredits.and.returnValue(of(movieCredits));
+    backendServiceSpy.addMovieToToplist.and.returnValue(of(''));
+    backendServiceSpy.deleteMovieFromToplist.and.returnValue(of(''));
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(movieDetailComponent).toBeTruthy();
+  });
+
+  it('getMovieCredits should equal movieCredits', () => {
+    expect(movieDetailComponent.getMovieCredits()).toEqual(movieCredits);
+  });
+  it('should return directors only', () => {
+    expect(movieDetailComponent.getDirectors()).toEqual('Harry, Ron');
+  });
+
+  it('should return false as initial value for isMovieOnToplist', () => {
+    expect(movieDetailComponent.isMovieOnToplistValue()).toEqual(false);
+  });
+  it('should return true after calling addToToplist', () => {
+    movieDetailComponent.addToToplist();
+    expect(movieDetailComponent.isMovieOnToplistValue()).toEqual(true);
+  });
+  it('should return false after calling deleteFromToplist', () => {
+    movieDetailComponent.deleteFromToplist();
+    expect(movieDetailComponent.isMovieOnToplistValue()).toEqual(false);
   });
 });

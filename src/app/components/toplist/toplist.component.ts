@@ -7,7 +7,6 @@ import {MovieDetailComponent} from "../movie-detail/movie-detail.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {ToplistStore} from "../../shared/stores/toplist-store";
 import {MovieSearchApiObject} from "../../shared/models/tmdb/MovieSearchApiObject";
-import {ToplistResultApiObject} from "../../shared/models/backend/ToplistResultApiObject";
 
 @Component({
   selector: 'app-toplist',
@@ -16,17 +15,15 @@ import {ToplistResultApiObject} from "../../shared/models/backend/ToplistResultA
 })
 export class ToplistComponent implements OnInit, OnDestroy {
   hasResults: boolean;
-  data: ToplistResultApiObject;
-  private dialogRef: MatDialogRef<MovieDetailComponent, MovieSearchApiObject>;
+  dialogRef: MatDialogRef<MovieDetailComponent, MovieSearchApiObject>;
   public moviesOnToplist = new BehaviorSubject<MovieSearchApiObject[]>([]);
   private onDestroy$ = new Subject();
-  public movies: MovieSearchApiObject[];
 
   constructor(
     public authService: AuthService,
     public formBuilder: FormBuilder,
     public tmdbService: TmdbService,
-    private dialog: MatDialog,
+    public dialog: MatDialog,
     private toplistStore: ToplistStore) {
   }
 
@@ -53,7 +50,6 @@ export class ToplistComponent implements OnInit, OnDestroy {
       width: '900px',
       height: '625px'
     });
-
   }
 
   ngOnDestroy(): void {

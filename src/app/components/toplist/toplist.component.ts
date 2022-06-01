@@ -14,7 +14,6 @@ import {MovieSearchApiObject} from "../../shared/models/tmdb/MovieSearchApiObjec
   styleUrls: ['./toplist.component.scss']
 })
 export class ToplistComponent implements OnInit, OnDestroy {
-  hasResults = false;
   dialogRef: MatDialogRef<MovieDetailComponent, MovieSearchApiObject>;
   public moviesOnToplist = new BehaviorSubject<MovieSearchApiObject[]>([]);
   private isLoading = new BehaviorSubject<boolean>(true);

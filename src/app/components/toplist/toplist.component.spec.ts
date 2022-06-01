@@ -45,8 +45,8 @@ describe('ToplistComponent', () => {
     expect(toplistComponent).toBeTruthy();
   });
 
-  it('hasResults should be true after initializing', () => {
-    expect(toplistComponent.hasResults).toBe(true);
+  it('isLoading should be false after initializing', () => {
+    expect(toplistComponent.isLoadingValue()).toBe(false);
   });
   it('moviesOnToplist should have the value of movieSearch after initializing', () => {
     expect(toplistComponent.moviesOnToplist.getValue()).toEqual(movieSearch);

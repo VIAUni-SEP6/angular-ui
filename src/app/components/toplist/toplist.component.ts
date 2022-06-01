@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../../shared/services/auth.service";
 import {FormBuilder} from "@angular/forms";
-import {BehaviorSubject, map, Subject, takeUntil} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
 import {TmdbService} from "../../shared/services/tmdb.service";
 import {MovieDetailComponent} from "../movie-detail/movie-detail.component";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
@@ -14,9 +14,10 @@ import {MovieSearchApiObject} from "../../shared/models/tmdb/MovieSearchApiObjec
   styleUrls: ['./toplist.component.scss']
 })
 export class ToplistComponent implements OnInit, OnDestroy {
-  hasResults: boolean;
+  hasResults = false;
   dialogRef: MatDialogRef<MovieDetailComponent, MovieSearchApiObject>;
   public moviesOnToplist = new BehaviorSubject<MovieSearchApiObject[]>([]);
+  private isLoading = new BehaviorSubject<boolean>(true);
   private onDestroy$ = new Subject();
 
   constructor(
@@ -29,18 +30,14 @@ export class ToplistComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.toplistStore.getToplistChanges$()
-      .pipe(
-        takeUntil(this.onDestroy$),
-        map((moviesFromStore: MovieSearchApiObject[] | null) => {
-          if (moviesFromStore === null) {
-            this.toplistStore.refreshToplist();
-          } else {
-            this.moviesOnToplist.next(moviesFromStore);
-          }
-        }),
-      )
-      .subscribe(() => this.hasResults = true);
-
+      .subscribe((moviesFromStore: MovieSearchApiObject[] | null) => {
+        if (moviesFromStore === null) {
+          this.toplistStore.refreshToplist();
+        } else {
+          this.moviesOnToplist.next(moviesFromStore);
+          this.isLoading.next(false)
+        }
+      });
   }
 
   openMovieDetails(movie: MovieSearchApiObject) {
@@ -52,8 +49,11 @@ export class ToplistComponent implements OnInit, OnDestroy {
     });
   }
 
+  isLoadingValue() {
+    return this.isLoading.getValue();
+  }
+
   ngOnDestroy(): void {
-    this.hasResults = false;
     this.onDestroy$.next('');
     this.onDestroy$.complete();
   }

@@ -12,9 +12,9 @@
 </div>
   <div *ngIf="hasResults; else placeholder" class="movies-wrapper">
     <div *ngFor="let movie of movies.results" class="movies-content" (click)="openMovieDetails(movie)">
-      <img matCardImage *ngIf="movie.poster_path; else placeholderImage" class="images"
+      <img *ngIf="movie.poster_path; else placeholderImage" class="images"
            src="{{'https://image.tmdb.org/t/p/original/' + movie.poster_path}}" alt=""/>
-      <label class="movie-title" matCardTitle> {{movie.title}}</label>
+      <label class="movie-title"> {{movie.title}}</label>
     </div>
   </div>
 <ng-template #placeholderImage>

@@ -3,7 +3,7 @@
   <mat-dialog-content class="mat-dialog-content movies-content">
     <div class="wrapper">
       <div class="content1">
-        <img mat-card-image *ngIf="data.poster_path; else placeholder" class="images"
+        <img *ngIf="data.poster_path; else placeholder" class="images"
              src="{{'https://image.tmdb.org/t/p/original/' + data.poster_path}}" alt=""/>
       </div>
       <div class="content2">
